@@ -1,8 +1,10 @@
-import tkinter as tk
-import csv
-import pandas as pd
-
+"""import modul tkinter"""
+import tkinter as tk # import tkinter
+import csv # import csv
+# from ast import literal_eval
+# import pandas  as pd # import panda
 class Calculatrice(tk.Tk):
+    """class calculet """
     def __init__(self):
         super().__init__()
         self.title("Calculatrice")
@@ -11,7 +13,7 @@ class Calculatrice(tk.Tk):
         self.resultat_var.set("0")
 
         # Entry pour afficher le résultat
-        entry_resultat = tk.Entry(self, textvariable=self.resultat_var, font=('Arial', 14), justify='right', state='disabled')
+        entry_resultat = tk.Entry(self, textvariable=self.resultat_var,font=('Arial', 14), justify='right',state='disabled')
         entry_resultat.grid(row=0, column=0, columnspan=4, sticky='nsew')
 
         # Fonction pour mettre à jour le résultat
@@ -26,19 +28,19 @@ class Calculatrice(tk.Tk):
         def calculer_resultat():
             try:
                 calcul = self.resultat_var.get()
-                resultat = eval(calcul)
-                self.resultat_var.set(resultat)
-            except Exception:
-                self.resultat_var.set("Erreur")
+                resul = eval(calcul)
+                self.resultat_var.set(resul)          
+            except ImportError as e:
+                self.resultat_var.set(" error "+e)
 
-        # Fonction pour enregistrer dans un fichier CSV
-        def sauvegarder_csv(calcul, resultat):
+        # Function for save dans un file CSV
+        def save_csv(calcul, result):
             try:
-                with open('historique_calculs.csv', 'a', newline='') as file:
+                with open('historique_calculs.csv', 'a', encoding="utf-8",newline='') as file:
                     writer = csv.writer(file)
-                    writer.writerow([calcul, resultat])
-            except Exception:
-                self.resultat_var.set("Erreur lors de l'enregistrement")
+                    writer.writerow([calcul, result])
+            except ValueError as e:
+                self.resultat_var.set("Erreur lors de l'enregistrement" +e)
 
         # Fonction pour annuler la dernière entrée
         def annuler():
@@ -49,15 +51,15 @@ class Calculatrice(tk.Tk):
         # Fonction pour mémoriser dans le fichier CSV
         def memoriser_dans_csv():
             calcul = self.resultat_var.get()
-            resultat = eval(calcul)
-            sauvegarder_csv(calcul, resultat)
+            result = eval(calcul)
+            save_csv(calcul, result)
 
-        # Fonction pour réinitialiser la calculatrice
+        # Function for réinitialise la calculatrice
         def reset_calculatrice():
             self.resultat_var.set("0")
 
-        # Fonction pour gérer les saisies clavier
-        def saisie_clavier(event):
+        # Function for clavier
+        def write_clavier(event):
             touche = event.char
             if touche.isdigit() or touche in ['+', '-', '*', '/', '.', '=']:
                 mettre_a_jour_resultat(touche)
@@ -70,14 +72,15 @@ class Calculatrice(tk.Tk):
             self.grid_rowconfigure(i, weight=1)
             self.grid_columnconfigure(i, weight=1)
 
-        # Lier la fonction saisie_clavier à l'événement de saisie clavier
-        self.bind('<Key>', saisie_clavier)
+        # read function write_clavier
+        self.bind('<Key>', write_clavier)
 
-        # Configuration des boutons spécifiques
-        bouton_memoriser = tk.Button(self, text='Memoriser', font=('Arial', 14), command=memoriser_dans_csv)
-        bouton_memoriser.grid(row=5, column=0, sticky='nsew')
+        # Configuration des button
+        bouton_memoriser = tk.Button(self, text='Memoriser',font=('Arial', 14),
+                                     command=memoriser_dans_csv)
+        bouton_memoriser.grid(row=5,column=0, sticky='nsew')
 
-        bouton_annuler = tk.Button(self, text='Annuler', font=('Arial', 14), command=annuler)
+        bouton_annuler = tk.Button(self,text='Annuler',font=('Arial', 14),command=annuler)
         bouton_annuler.grid(row=5, column=1, sticky='nsew')
 
         bouton_reset = tk.Button(self, text='Reset', font=('Arial', 14), command=reset_calculatrice)
