@@ -32,7 +32,7 @@ class Calculatrice(tk.Tk):
 
         # Fonction pour stocker dans un DataFrame Pandas et sauvegarder dans un fichier CSV
         def sauvegarder_csv():
-            try:
+            try: 
                 resultat = eval(self.resultat_var.get())
                 df = pd.DataFrame({'Calcul': [self.resultat_var.get()], 'Résultat': [resultat]})
                 df.to_csv('historique_calculs.csv', mode='a', index=False, header=not df_exists())
@@ -63,13 +63,13 @@ class Calculatrice(tk.Tk):
                 calculer_resultat()
 
         # Configuration des boutons pour les opérateurs
-        operateurs = ['+', '-', '/', 'x']
-        operation_combobox = ttk.Combobox(self, values=operateurs)
-        operation_combobox.set('Choix')
-        operation_combobox.grid(row=5, column=2, sticky='nsew')
+        # operateurs = ['+', '-', '/', 'x']
+        # operation_combobox = ttk.Combobox(self, values=operateurs)
+        # operation_combobox.set('Choix')
+        # operation_combobox.grid(row=5, column=2, sticky='nsew')
 
         # Configuration des boutons pour les opérations
-        operations = [('=', 4, 3), ('Enregistrer', 5, 0), ('Annuler', 5, 1)]
+        operations = [('=', 5, 2), ('Enregistrer', 5, 0), ('Annuler', 5, 1)]
 
         # Configuration des boutons pour les opérations
         for (texte, ligne, colonne) in operations:
