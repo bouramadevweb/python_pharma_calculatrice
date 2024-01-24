@@ -4,7 +4,7 @@ import csv # import csv
 # from ast import literal_eval
 # import pandas  as pd # import panda
 class Calculatrice(tk.Tk):
-    """class calculet """
+    """class calculatrice """
     def __init__(self):
         super().__init__()
         self.title("Calculatrice")
