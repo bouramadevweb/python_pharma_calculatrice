@@ -72,7 +72,7 @@ class Calculatrice(tk.Tk):
             self.grid_rowconfigure(i, weight=1)
             self.grid_columnconfigure(i, weight=1)
 
-        # read function write_clavier
+        # lire le clavier
         self.bind('<Key>', write_clavier)
 
         # Configuration des button
