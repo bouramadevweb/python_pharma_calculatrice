@@ -1,7 +1,7 @@
 """import modul tkinter"""
 import tkinter as tk # import tkinter
 import csv # import csv
-import math
+import ast #
 class Calculatrice(tk.Tk):
     """class calculatrice """
     def __init__(self):
@@ -27,8 +27,9 @@ class Calculatrice(tk.Tk):
             else:
                 self.resultat_var.set(ancien_resultat + valeur)
 
-        # Fonction pour le résultat 
         def calculer_resultat():
+            #Fonction pour le résultat 
+
             try:
                 calcul = self.resultat_var.get()
                 resul = eval(calcul)
@@ -54,7 +55,7 @@ class Calculatrice(tk.Tk):
         # Fonction pour mémoriser dans le fichier CSV
         def memoriser_dans_csv():
             calcul = self.resultat_var.get()
-            result = eval(calcul)
+            result = (['calcul'])
             save_csv(calcul, result)
 
         # Function for réinitialise la calculatrice
@@ -91,4 +92,5 @@ class Calculatrice(tk.Tk):
 
 if __name__ == "__main__":
     app = Calculatrice()
+    app.geometry("700x400")
     app.mainloop()
