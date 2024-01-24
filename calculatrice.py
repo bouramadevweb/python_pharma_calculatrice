@@ -1,8 +1,7 @@
 """import modul tkinter"""
 import tkinter as tk # import tkinter
 import csv # import csv
-# from ast import literal_eval
-# import pandas  as pd # import panda
+import math
 class Calculatrice(tk.Tk):
     """class calculatrice """
     def __init__(self):
@@ -12,8 +11,12 @@ class Calculatrice(tk.Tk):
         self.resultat_var = tk.StringVar()
         self.resultat_var.set("0")
 
-        # Entry pour afficher le résultat
-        entry_resultat = tk.Entry(self, textvariable=self.resultat_var,font=('Arial', 14), justify='right',state='disabled')
+        # Entry
+        entry_resultat = tk.Entry(self,
+                                  textvariable=self.resultat_var,
+                                  font=('Arial', 14), 
+                                  justify='right',
+                                  state='disabled')
         entry_resultat.grid(row=0, column=0, columnspan=4, sticky='nsew')
 
         # Fonction pour mettre à jour le résultat
@@ -24,7 +27,7 @@ class Calculatrice(tk.Tk):
             else:
                 self.resultat_var.set(ancien_resultat + valeur)
 
-        # Fonction pour calculer le résultat et enregistrer dans un fichier CSV
+        # Fonction pour le résultat 
         def calculer_resultat():
             try:
                 calcul = self.resultat_var.get()
