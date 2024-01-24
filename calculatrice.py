@@ -33,7 +33,7 @@ class Calculatrice(tk.Tk):
             except ImportError as e:
                 self.resultat_var.set(" error "+e)
 
-        # Function for save dans un file CSV
+        # Fonction pour enregistre dans  CSV
         def save_csv(calcul, result):
             try:
                 with open('historique_calculs.csv', 'a', encoding="utf-8",newline='') as file:
